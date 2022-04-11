@@ -1,6 +1,6 @@
 public class Main {
     public static void main(String[] args) throws Exception {
-        FileOperations operations=new FileOperations();
+        TextFileOperations operations=new TextFileOperations();
         System.out.println("Add code to test operations");
     }
 }

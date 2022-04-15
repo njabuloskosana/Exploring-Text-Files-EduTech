@@ -1,6 +1,6 @@
 public class TextFileOperations {
 
-    private String filePath="";
+    private String filePath="D:\\Personal\\work\\School of IT\\Week 5\\Assignment 3\\FileReaderAndWriter\\files\\src\\Assignment3dai.txt";
 
     /**
      * This method reads in a text file with the file name

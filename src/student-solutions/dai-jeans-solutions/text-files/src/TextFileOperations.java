@@ -1,3 +1,6 @@
+import java.util.Scanner;
+import java.io.*;
+import java.nio.file.*;;
 public class TextFileOperations {
 
     private String filePath="D:\\Personal\\work\\School of IT\\Week 5\\Assignment 3\\FileReaderAndWriter\\files\\src\\Assignment3dai.txt";
@@ -10,8 +13,15 @@ public class TextFileOperations {
      */
     public void readEntireFile(String filename)
     {
-        
+        File file = new File(filePath);
+    //use scanner
+     Scanner sc = new Scanner(filePath);
 
+     while (sc.hasNextLine())
+     {
+         System.out.println(sc.nextLine());
+     }
+       
     }
 
     /**
@@ -22,6 +32,7 @@ public class TextFileOperations {
      */
     public int numberOfLines(String filename)
     {
+        File file = new File(filePath);
         return 0;
     }
 

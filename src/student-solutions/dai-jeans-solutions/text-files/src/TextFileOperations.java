@@ -1,6 +1,15 @@
+import java.util.Map;
+import java.util.Scanner;
+import java.io.*;
+import java.nio.file.*;
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
+
 public class TextFileOperations {
 
-    private String filePath="";
+    public String filePath="D:\\Personal\\work\\School of IT\\Week 5\\Assignment 3\\FileReaderAndWriter\\files\\src\\Assignment3dai.txt";
 
     /**
      * This method reads in a text file with the file name
@@ -10,8 +19,15 @@ public class TextFileOperations {
      */
     public void readEntireFile(String filename)
     {
-        
+        File file = new File(filePath);
+        //use scanner
+        Scanner sc = new Scanner(filePath);
 
+     while (sc.hasNextLine())
+     {
+         System.out.println(sc.nextLine());
+     }
+       
     }
 
     /**
@@ -22,7 +38,16 @@ public class TextFileOperations {
      */
     public int numberOfLines(String filename)
     {
+        int count = 0;
+        File file = new File(filePath);
+        Scanner sc = new Scanner(filePath);
+
+        while(sc.hasNextLine()) {
+            sc.nextLine();
+            count++;
+        }
         return 0;
+        
     }
 
     /**
@@ -35,7 +60,17 @@ public class TextFileOperations {
      */
     public void readFirstNLines(String filename,int n)
     {
-        
+        int lineNumber = 2;
+ 
+        try {
+            FileReader file = new FileReader(filePath);
+            BufferedReader buffer = new BufferedReader (file);
+            String line = buffer.readLine();
+            System.out.println(line);
+
+         } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -61,7 +96,19 @@ public class TextFileOperations {
      */
     public void appendText(String filename,String text)
     {
+        String fileName = filePath;
+        try{ 
+            BufferedWriter out = new BufferedWriter(new FileWriter(fileName));
         
+         out.write("In conclusion to the written statement above:\n");
+
+         out.close();
+        }
+        catch (IOException e)
+        {
+
+        }
+
     }
 
     
@@ -75,6 +122,15 @@ public class TextFileOperations {
      */
     public int[] generateArray(String filename)
     {
+        File file = new File (filePath);
+        Scanner scanner = new Scanner(file);
+        int [] tall = new int [100];
+        int i = 0;
+        while(scanner.hasNextInt())
+        {
+             tall[i++] = scanner.nextInt();
+        }
+
         return null;
     }
 
@@ -88,8 +144,26 @@ public class TextFileOperations {
      */
     public String longestWord(String filename)
     {
-        return null;
+        try{String longestWord = "";
+        String current;
+        Scanner scan = new Scanner(new File(filePath));
+
+        while (scan.hasNext()) 
+        {
+        current = scan.next();
+        if (current.length() > longestWord.length()) 
+        {
+            longestWord = current;
+        }
+        
+         System.out.println(longestWord);
+        }
+        }
+        catch (FileNotFoundException e){}
+        System.out.println();
+        return longestWord;
     }
+        
 
      /**
      * This method reads in a textfile that has a single word
@@ -102,6 +176,25 @@ public class TextFileOperations {
      */
     public int FrequencyOfWord(String filename,String word)
     {
+        Map<String, Integer> words = new HashMap<String, Integer>();
+        Scanner file = new Scanner (new File(filePath));
+
+        while (file.hasNext())
+        {
+            String word2 = file.next();
+            Integer count = words.get(word);
+            if (count != null){
+                count++;
+            }
+            else 
+                count = 1;
+                words.put(word,count);
+
+            file.close();
+          
+        }
+
+
         return 0;
     }
 
@@ -116,7 +209,25 @@ public class TextFileOperations {
      */
     public boolean ContainsWord(String filename,String word)
     {
-        return false;
+        String containsWord = null;
+        Scanner scan = new Scanner(System.in);
+        word = scan.nextLine();
+
+        try {
+            if(filePath==word)
+                {
+                return true;
+                }
+            else
+                {
+                return false;
+                } 
+            }
+            catch (FileNotFoundException e) 
+            {
+                e.printStackTrace();
+            }
+        }
     }
 
     
@@ -132,6 +243,13 @@ public class TextFileOperations {
      */
     public boolean isEqual(String filename1,String filename2)
     {
+        String filePath2 = "D:\\Personal\\work\\School of IT\\Week 5\\Assignment 3\\FileReaderAndWriter\\files\\src\\Assignment3dai file 2.txt";
+        File file = new File (filePath);
+        File file2 = new File (filePath2);
+
+        boolean compare1and2 = FilecontentEquals(file, file2);
+
+    
         return false;
     }
 
@@ -144,6 +262,24 @@ public class TextFileOperations {
     public void performCopy(String filename1,String filename2)
     {
         
+        String filePath2 = "D:\\Personal\\work\\School of IT\\Week 5\\Assignment 3\\FileReaderAndWriter\\files\\src\\Assignment3dai file 2.txt";
+        Scanner sc = new Scanner(System.in);
+        System.out.print(filePath);
+        String sfile = sc.next();
+        System.out.print(filePath2);
+        String dfile = sc.next();
+        FileReader fin = new FileReader(sfile);
+        FileWriter fout = new FileWriter(dfile, true);
+        int c;
+
+        while(( c = fin.read()) != -1)
+        {
+            fout.write(c);
+        }
+        System.out.println("Copy finish...");
+        fin.close();
+        fout.close();
+    
     }
 
     
